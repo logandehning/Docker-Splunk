@@ -1,1 +1,2 @@
-# Docker-Splunk
+# Running Splunk in a Docker Container
+
