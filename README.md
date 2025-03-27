@@ -43,4 +43,6 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 
 ![hello-world](hello-world.jpg)   
 
+## 3. Setting Up Splunk
+
 To be continued...
