@@ -40,6 +40,10 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 ```
 
 3. Finally, I verified that the installation ws successful by running Docker's <code>hello-world</code> image:
+```
+sudo docker run hello-world
+```
+Successful running of the <code>hello-world</code> image yielded this output:
 
 ![hello-world](hello-world.jpg)   
 
