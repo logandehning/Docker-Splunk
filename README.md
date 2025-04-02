@@ -49,4 +49,35 @@ Successful running of the <code>hello-world</code> image yielded this output:
 
 ## 3. Setting Up Splunk
 
+The final step in the setup for my environment was running an instance of Splunk in a Docker container. The command I used to create my Splunk instance was:
+```
+sudo docker run --name splunk -p 8000:8000 \
+-e "SPLUNK_PASSWORD=[password]" -e "SPLUNK_START_ARGS=--accept-license" \
+-it -v splunk-data:/opt/splunk splunk/splunk:latest
+```
+There are a few things going on in this command:
+
+
+<code>sudo</code>: This runs the command using superuser privileges.
+
+<code>docker</code>: This used the Docker CLI to interact with Docker.
+
+<code>run</code>: This tells Docker to create and start a new container with the image that will be specifed later.
+
+<code>--name splunk</code>: This assigns the name <code>splunk</code> to the container, making it easier to reference in future commands.
+
+<code>-p 8000:8000</code>: This binds port 8000 of my VM to port 8000 of the container. In the flag <code>-p x : y</code> , <code>x</code> is the port on the host machine and <code>y</code> is the port in the Docker container. This will let me access my Splunk web interface at <code>http://localhost:8000</code> in Firefox.
+
+<code>-e "SPLUNK_PASSWORD=<password>"</code>: This sets the <code>SPLUNK_PASSWORD</code> variable inside the container. This is the password for the <code>admin</code> user in Splunk. 
+_Note: If copying and pasting this command, make sure an actual password is used in this field._
+
+<code>-e "SPLUNK_START_ARGS=--accept-license"</code>: This is sets an environment variable called <code>SPLUNK_START_ARGS</code> that will automatically accept the Splunk license, a requirement for running Splunk.
+
+<code>-it</code>: This is a combination of the <code>-i</code> and <code>-t</code> flags that will allow for interaction with the container.
+
+<code>-v splunk-data:/opt/splunk</code>: This mounts a named volume called <code>splunk-data</code> to the <code>/opt/splunk</code> direectory on the host.
+
+<code>splunk/splunk:latest</code>: This specifies that the offical splunk image <code>splunk/splunk</code> should be used adn that it should be the latest version of Splunk.
+
+
 To be continued...
