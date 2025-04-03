@@ -77,14 +77,18 @@ _Note: If copying and pasting this command, make sure an actual password is used
 
 <code>-it</code>: This is a combination of the <code>-i</code> and <code>-t</code> flags that will allow for interaction with the container.
 
-<code>-v splunk-data:/opt/splunk</code>: This mounts a named volume called <code>splunk-data</code> to the <code>/opt/splunk</code> direectory on the host.
+<code>-v splunk-data:/opt/splunk</code>: This mounts a named volume called <code>splunk-data</code> to the <code>/opt/splunk</code> directory on the host. There are multiple options for storage management such as bind mounts and volume mounts. Docker has [helpful documentation](https://docs.docker.com/engine/storage/) detailing the different types of storage available for containers and when to use them.
 
 <code>splunk/splunk:latest</code>: This specifies that the offical splunk image <code>splunk/splunk</code> should be used adn that it should be the latest version of Splunk.
 
-### Persistence
+After running the container creation command, I ran this command:
 
-One of the biggest issues I ran into when creating and running my Splunk container was how to deal with the ephemeral nature of the containers I was creating. The first time I ran Splunk, I logged into the web interface and began to download and install the different apps and add-ons I was going to need for BOTS. Unfortunately, after stopping the container and starting it again later, all of that data was gone.
+```
+watch -n 1 'sudo docker ps -a'
+```
 
-There are multiple options to ensure persistence such as bind mounts and volume mounts. Docker has [helpful documentation](https://docs.docker.com/engine/storage/) detailing the different types of storage available for containers.
+This allowed me to watch the progress of the container. Once it showed ```(healthy)``` in the ```STATUS``` column, I knew that I would be able to acess the Splunk web interface in my browser.
+
+### Apps and Add-Ons
 
 To be continued...
