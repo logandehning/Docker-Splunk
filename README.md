@@ -89,6 +89,12 @@ watch -n 1 'sudo docker ps -a'
 
 This allowed me to watch the progress of the container. Once it showed ```(healthy)``` in the ```STATUS``` column, I knew that I would be able to acess the Splunk web interface in my browser.
 
+![healthy_container](new_container_healthy.jpg)
+
+![splunk_web_interface](splunk_web_interface.jpg)
+
 ### Apps and Add-Ons
+
+
 
 To be continued...
