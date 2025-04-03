@@ -85,4 +85,6 @@ _Note: If copying and pasting this command, make sure an actual password is used
 
 One of the biggest issues I ran into when creating and running my Splunk container was how to deal with the ephemeral nature of the containers I was creating. The first time I ran Splunk, I logged into the web interface and began to download and install the different apps and add-ons I was going to need for BOTS. Unfortunately, after stopping the container and starting it again later, all of that data was gone.
 
+There are multiple options to ensure persistence such as bind mounts and volume mounts. Docker has [helpful documentation](https://docs.docker.com/engine/storage/) detailing the different types of storage available for containers.
+
 To be continued...
