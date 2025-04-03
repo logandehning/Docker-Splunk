@@ -49,6 +49,8 @@ Successful running of the <code>hello-world</code> image yielded this output:
 
 ## 3. Setting Up Splunk
 
+### Creating and Starting the Splunk Instance
+
 The final step in the setup for my environment was running an instance of Splunk in a Docker container. The command I used to create my Splunk instance was:
 ```
 sudo docker run --name splunk -p 8000:8000 \
@@ -79,5 +81,8 @@ _Note: If copying and pasting this command, make sure an actual password is used
 
 <code>splunk/splunk:latest</code>: This specifies that the offical splunk image <code>splunk/splunk</code> should be used adn that it should be the latest version of Splunk.
 
+### Persistence
+
+One of the biggest issues I ran into when creating and running my Splunk container was how to deal with the ephemeral nature of the containers I was creating. The first time I ran Splunk, I logged into the web interface and began to download and install the different apps and add-ons I was going to need for BOTS. Unfortunately, after stopping the container and starting it again later, all of that data was gone.
 
 To be continued...
