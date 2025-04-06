@@ -95,8 +95,6 @@ This allowed me to watch the progress of the container. Once it showed ```(healt
 
 ### BOTS Dataset, Apps, and Add-Ons
 
-
-
 Once my environment was setup, it was finally time to setup my Splunk to be able to complete the BOTS CTF. Splunk provides the dataset for free on the [BOTS v3 Github](https://github.com/splunk/botsv3) along with a list of all the apps and add-ons that are needed to complete the CTF. Because BOTS v3 was released over 5 years ago, some of the apps and add-ons have slightly different names, but the links provided on the BOTS v3 Github still lead to the correct apps and add-ons.
 
 To be continued...
