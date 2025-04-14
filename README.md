@@ -79,7 +79,7 @@ _Note: If copying and pasting this command, make sure an actual password is used
 
 <code>-v splunk-data:/opt/splunk</code>: This mounts a named volume called <code>splunk-data</code> to the <code>/opt/splunk</code> directory on the host. There are multiple options for storage management such as bind mounts and volume mounts. Docker has [helpful documentation](https://docs.docker.com/engine/storage/) detailing the different types of storage available for containers and when to use them.
 
-<code>splunk/splunk:latest</code>: This specifies that the offical splunk image <code>splunk/splunk</code> should be used adn that it should be the latest version of Splunk.
+<code>splunk/splunk:latest</code>: This specifies that the official splunk image <code>splunk/splunk</code> should be used and that it should be the latest version of Splunk.
 
 After running the container creation command, I ran this command:
 
@@ -87,7 +87,7 @@ After running the container creation command, I ran this command:
 watch -n 1 'sudo docker ps -a'
 ```
 
-This allowed me to watch the progress of the container. Once it showed ```(healthy)``` in the ```STATUS``` column, I knew that I would be able to acess the Splunk web interface in my browser.
+This allowed me to watch the progress of the container. Once it showed ```(healthy)``` in the ```STATUS``` column, I knew that I would be able to access the Splunk web interface in my browser.
 
 ![healthy_container](new_container_healthy.jpg)
 
@@ -98,5 +98,9 @@ This allowed me to watch the progress of the container. Once it showed ```(healt
 Once my environment was setup, it was finally time to setup my Splunk to be able to complete the BOTS CTF. Splunk provides the dataset for free on the [BOTS v3 Github](https://github.com/splunk/botsv3) along with a list of all the apps and add-ons that are needed to complete the CTF. Because BOTS v3 was released over 5 years ago, some of the apps and add-ons have slightly different names, but the links provided on the BOTS v3 Github still lead to the correct apps and add-ons.
 
 I also needed to have access to the questions, hints, and answers for the BOTS v3 CTF. Splunk provides these for anyone who emails [bots@splunk.com](mailto:bots@splunk.com). The zipped folder in which they reside can also be found [here](https://botsdataset.s3.amazonaws.com/bots_questions/botsv3content.zip).
+
+Splunk also has two apps, a [CTF Scoreboard app](https://github.com/splunk/SA-ctf_scoreboard) and the associated [CTF Scoreboard Admin app](https://github.com/splunk/SA-ctf_scoreboard_admin), that were designed to be used in CTF competitions and provide a more gamified experience when completing the BOTS challenges. I was able to download and install the apps without any issues, but ran into a few minor issues during setup. To make a very long story short, I spent a day tinkering with the apps' Python files and configurations to no avail. Based on my limited knowledge and the Googling I did during my fruitless attempt to get the apps to work, I am assuming that the apps were designed to work with older versions of Splunk and older versions of the apps and add-ons I had installed. I eventually concluded that, while it would be fun to have the CTF Scoreboard app working correctly, I was straying a little too far from the original intent behind this project. I decided to cut my losses and proceed with the challenge while manually looking up the questions and answers. Perhaps in the future I will revisit the challenge of getting the CTF Scoreboard app to work.
+
+## 4. The BOTS Challenge
 
 To be continued...
