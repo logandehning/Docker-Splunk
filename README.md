@@ -99,7 +99,19 @@ Once my environment was setup, it was finally time to setup my Splunk to be able
 
 I also needed to have access to the questions, hints, and answers for the BOTS v3 CTF. Splunk provides these for anyone who emails [bots@splunk.com](mailto:bots@splunk.com). The zipped folder in which they reside can also be found [here](https://botsdataset.s3.amazonaws.com/bots_questions/botsv3content.zip).
 
-Splunk also has two apps, a [CTF Scoreboard app](https://github.com/splunk/SA-ctf_scoreboard) and the associated [CTF Scoreboard Admin app](https://github.com/splunk/SA-ctf_scoreboard_admin), that were designed to be used in CTF competitions and provide a more gamified experience when completing the BOTS challenges. I was able to download and install the apps without any issues, but ran into a few minor issues during setup. To make a very long story short, I spent a day tinkering with the apps' Python files and configurations to no avail. Based on my limited knowledge and the Googling I did during my fruitless attempt to get the apps to work, I am assuming that the apps were designed to work with older versions of Splunk and older versions of the apps and add-ons I had installed. I eventually concluded that, while it would be fun to have the CTF Scoreboard app working correctly, I was straying a little too far from the original intent behind this project. I decided to cut my losses and proceed with the challenge while manually looking up the questions and answers. Perhaps in the future I will revisit the challenge of getting the CTF Scoreboard app to work.
+Splunk also has two apps, a [CTF Scoreboard app](https://github.com/splunk/SA-ctf_scoreboard) and the associated [CTF Scoreboard Admin app](https://github.com/splunk/SA-ctf_scoreboard_admin), that were designed to be used in CTF competitions and provide a more gamified experience when completing the BOTS challenges. I was able to download and install the apps without any issues, but ran into a few minor issues during setup. To make a very long story short, I spent a day tinkering with the apps' Python files and configurations to no avail. Based on my limited knowledge and the Googling I did during my fruitless attempt to get the apps to work, I am assuming that the apps were designed to work with older versions of Splunk and older versions of the apps and add-ons I had installed. I eventually concluded that, while it would be fun to have the CTF Scoreboard app working correctly, I was straying a little too far from the original intent behind this project. Perhaps in the future I will revisit the challenge of getting the CTF Scoreboard app to work.
+
+In place of the CTF Scoreboard app, I decided to instead use macros to be able to use the Splunk search app to check my answers and get hints if needed. I started by opening a bash shell as the root user inside my docker container using this command:
+```
+sudo docker exec -it -u 0 splunk /bin/bash
+```
+
+I used this shell to find the ```lookups``` directory in my docker container. Once I found it, I opened a new terminal window and copied the CSV files for the answers and hints into the ```lookups``` using this command:
+```
+sudo docker cp /home/logan/Desktop/cloud_splunk_project/botsv3content/botsv3content/<csv file> splunk:/opt/splunk/etc/apps/search/lookups
+```
+
+To be continued...
 
 ## 4. The BOTS Challenge
 
