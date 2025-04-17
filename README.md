@@ -106,17 +106,57 @@ In place of the CTF Scoreboard app, I decided to instead use macros to be able t
 sudo docker exec -it -u 0 splunk /bin/bash
 ```
 
-I used this shell to find the ```lookups``` directory in my docker container. Once I found it, I opened a new terminal window and copied the CSV files for the answers and hints into the ```lookups``` using this command:
+I used this shell to find the ```lookups``` directory in my docker container. Once I found it, I opened a new terminal window and copied the CSV files for the answers and hints into the ```lookups``` directory using this command:
 ```
 sudo docker cp /home/logan/Desktop/cloud_splunk_project/botsv3content/botsv3content/<csv file> splunk:/opt/splunk/etc/apps/search/lookups
 ```
 
-To be continued...
+With the CSV files in the ```lookups``` directory, I could now create my search macros by going to the Splunk Web homepage and going to the "Settings" menu and navigating to "Advanced Search" under the "Knowledge" section as shown below:
+
+![advanced_search](advanced_search.jpg)
+
+I then clicked the "Search Macros" button and clicked the "New Search Macro" button in the top right corner of the screen:
+
+![search_macros](search_macros.jpg)
+
+![new_search_macro](new_search_macro.jpg)
+
+I named the first macro ```answer(1)``` and set the definition as:
+```
+inputlookup ctf_answers.csv where Number=$question_number$
+```
+This takes the question number as an argument and returns that line of the answers CSV file.
+
+![answer_macro](answer_macro.jpg)
+
+I repeated the process for the hint macro naming it ```hints(1)``` and defining it as:
+```
+inputlookup ctf_hints.csv where Number=$question_number$
+```
+This takes the question number as an argument and returns all hints in the CSV file for that question.
+
+![hint_macro](hint_macro.jpg)
+
+To ensure the macros worked, I called them in the search app like this:
+```
+| `answer(1)`
+```
+and
+```
+| `hint(200)`
+```
+I knew they were working when I saw the correct rows from the CSV files returned.
+
+![answer_macro_results](answer_macro_results.jpg)
+
+![hint_macro_results](hint_macro_results.jpg)
 
 ## 4. The BOTS Challenge
 
 | Question # | Question | Query/Method Used | Answer |
 |------------|----------|-------------------|--------|
 |      1     |This is a simple question to get you familiar with submitting answers. What is the name of the company that makes the software that you are using for this competition? Answer guidance: A six-letter word with no punctuation.|Found in the top left corner of the Splunk search screen| splunk |
+|||||
+
 
 To be continued...
