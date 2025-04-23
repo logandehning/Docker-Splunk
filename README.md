@@ -153,10 +153,11 @@ I knew they were working when I saw the correct rows from the CSV files returned
 
 ## 4. The BOTS Challenge
 
-| Question # | Question | Query/Method Used | Answer |
-|------------|----------|-------------------|--------|
-|      1     |This is a simple question to get you familiar with submitting answers. What is the name of the company that makes the software that you are using for this competition? Answer guidance: A six-letter word with no punctuation.|Found in the top left corner of the Splunk search screen| splunk |
-|||||
+#### Question 1
+Question: This is a simple question to get you familiar with submitting answers. What is the name of the company that makes the software that you are using for this competition? Answer guidance: A six-letter word with no punctuation.
 
+Process: This is just a sample question designed to let player know how the CTF works. 
+
+Answer: splunk
 
 To be continued...
