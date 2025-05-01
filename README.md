@@ -160,4 +160,41 @@ Process: This is just a sample question designed to let player know how the CTF 
 
 Answer: splunk
 
+#### Question 200
+Question: List out the IAM users that accessed an AWS service (successfully or unsuccessfully) in Frothly's AWS environment.
+
+Process:
+
+First query to find all sourcetypes in the dataset:
+```
+| metadata type=sourcetypes index=botsv3
+| stats values(sourcetype)
+```
+
+Pivot using the ```aws:cloudtrail``` sourcetype and query looking for fields pertaining to users in the ```aws:cloudtrail``` sourcetype. AWS CloudTrail provides logging and monitoring information related to audit and GRC.
+```
+index=botsv3 sourcetype=aws:cloudtrail
+| fields user*
+| head 1000
+```
+
+Inspection of the returns shows the field ```user_type``` can have the value ```IAMUser```, which is seen in the question. This can be used to build the new query:
+```
+index=botsv3 sourcetype=aws:cloudtrail user_type=IAMUser
+```
+
+Looking at the fields in the results of this search show the usernames are in the field ```userName```, so adding that to the search will return the information we need for the final answer.
+```
+index=botsv3 sourcetype=aws:cloudtrail user_type=IAMUser
+| stats values(userName)
+```
+
+This query returns the four users for the final answer.
+
+Answer:
+bstoll,btun,splunk_access,web_admin
+
+#### Question 201
+Question: What field would you use to alert that AWS API activity have occurred without MFA (multi-factor authentication)?
+
 To be continued...
