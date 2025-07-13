@@ -216,3 +216,26 @@ Question: What is the processor number used on the web servers?
 
 Process:
 
+Reviewed the list of sourcetypes and found the sourcetype "hardware".
+
+Running a cursory query of events with the sourcetype "harware" with the following query ended up only returning 3 results:
+```
+sourcetype="hardware"
+| head 1000
+```
+
+All 3 results listed the ```CPU_TYPE``` as Intel(R) Xeon(R) CPU E5-2676 v3 @ 2.40GHz
+
+To confirm the hosts from these 3 events are web servers, I ran the following query and inspected the returned events:
+```
+host="gacrux.i-09cbc261e84259b54" OR host="gacrux.i-06fea586f3d3c8ce8" OR host="gacrux.i-0cc93bade2b3cba63"
+| head 1000
+```
+
+Reviewing the returned events revealed that the top two values in the ```app``` field were ```dns``` and ```httpd```, and the most common value in the ```server``` field at nearly 88% is ```Apache/2.2.34 (Amazon).
+
+Answer:
+E5-2676
+
+To be continued...
+
