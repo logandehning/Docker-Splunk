@@ -232,7 +232,7 @@ host="gacrux.i-09cbc261e84259b54" OR host="gacrux.i-06fea586f3d3c8ce8" OR host="
 | head 1000
 ```
 
-Reviewing the returned events revealed that the top two values in the ```app``` field were ```dns``` and ```httpd```, and the most common value in the ```server``` field at nearly 88% is ```Apache/2.2.34 (Amazon).
+Reviewing the returned events revealed that the top two values in the ```app``` field were ```dns``` and ```httpd```, and the most common value in the ```server``` field at nearly 88% is ```Apache/2.2.34 (Amazon)```.
 
 Answer:
 E5-2676
