@@ -199,4 +199,20 @@ bstoll,btun,splunk_access,web_admin
 #### Question 201
 Question: What field would you use to alert that AWS API activity have occurred without MFA (multi-factor authentication)?
 
-To be continued...
+Process:
+
+Queried to find AWS sourcetypes containing any references to "MFA"
+```
+sourcetypes="aws*" "*mfa*"
+```
+
+Looking through the fields with in the returned events showed several ```userIdentity``` fields. Reviewing these fields led me to the final answer.
+
+Answer:
+userIdentity.sessionContext.attributes.mfaAuthenticated
+
+#### Question 202
+Question: What is the processor number used on the web servers?
+
+Process:
+
