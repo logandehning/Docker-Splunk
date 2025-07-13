@@ -171,6 +171,8 @@ First query to find all sourcetypes in the dataset:
 | stats values(sourcetype)
 ```
 
+These search results will be open in their own tab throughout this CTF, as having a list of all sourcetypes makes it much easier to craft queries throughout the investigation.
+
 Pivot using the ```aws:cloudtrail``` sourcetype and query looking for fields pertaining to users in the ```aws:cloudtrail``` sourcetype. AWS CloudTrail provides logging and monitoring information related to audit and GRC.
 ```
 index=botsv3 sourcetype=aws:cloudtrail
