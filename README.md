@@ -255,5 +255,14 @@ The answer is the eventID for the first event.
 Answer:
 ab45689d-69cd-41e7-8705-5350402cf7ac
 
+#### Question 204
+Question: What is the name of the S3 bucket that was made publicly accessible?
+
+Process:
+I had already expanded all fields to investigate the previous question. I used Ctrl+F and searched for "name" which revealed the ```requestParameters.bucketName``` as `frothlywebcode`.
+
+Answer:
+frothlywebcode
+
 To be continued...
 
