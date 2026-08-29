@@ -237,5 +237,23 @@ Reviewing the returned events revealed that the top two values in the ```app``` 
 Answer:
 E5-2676
 
+#### Question 203
+Question: Bud accidentally makes an S3 bucket publicly accessible. What is the event ID of the API call that enabled public access?
+
+Process:
+Searched for "aws s3 bucket public access" and found [this article](https://repost.aws/knowledge-center/s3-bucket-public-access) in the AWS Knowledge Center. The article recommends reviewing CloudTrail events and focusing on event names ```PutBucketAcl``` and ```PutBucketPolicy```.
+
+I ran the following query that returned two ```PutBucketAcl``` events.
+```
+sourcetype="aws:cloudtrail" (eventName="PutBucketPolicy" OR eventName="PutBucketAcl")
+```
+
+Expanding the ```requestParameters``` field and all sub-fields showed Bud (aka bstoll) making the S3 bucket accessible in the first event and then making it private again in the second event.
+
+The answer is the eventID for the first event.
+
+Answer:
+ab45689d-69cd-41e7-8705-5350402cf7ac
+
 To be continued...
 
