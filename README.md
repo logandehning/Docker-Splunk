@@ -241,6 +241,7 @@ E5-2676
 Question: Bud accidentally makes an S3 bucket publicly accessible. What is the event ID of the API call that enabled public access?
 
 Process:
+
 Searched for "aws s3 bucket public access" and found [this article](https://repost.aws/knowledge-center/s3-bucket-public-access) in the AWS Knowledge Center. The article recommends reviewing CloudTrail events and focusing on event names ```PutBucketAcl``` and ```PutBucketPolicy```.
 
 I ran the following query that returned two ```PutBucketAcl``` events.
@@ -259,10 +260,30 @@ ab45689d-69cd-41e7-8705-5350402cf7ac
 Question: What is the name of the S3 bucket that was made publicly accessible?
 
 Process:
+
 I had already expanded all fields to investigate the previous question. I used Ctrl+F and searched for "name" which revealed the ```requestParameters.bucketName``` as `frothlywebcode`.
 
 Answer:
 frothlywebcode
+
+#### Question 205
+Question: What is the name of the text file that was successfully uploaded into the S3 bucket while it was publicly accessible?
+
+Process:
+
+I first modified my search by adding the time stamps from the events found in Question 203 as the date and time range for my search.
+
+I didn't think the answer would necessarily be found in the ```aws:cloudtrail``` sourcetype, so I expanded my search to all AWS sourcetypes and searched for any events related to ```frothlywebcode``` and ```"*.txt*"```.
+```
+sourcetype="aws:*" "*frothlywebcode*" "*.txt*"
+```
+Time:
+ 8/20/18 1:01:00.000 PM to 8/20/18 1:58:00.000 PM
+
+The searched returned 3 events with one of them being a ```REST.PUT.OBJECT``` operation for the file ```OPEN_BUCKET_PLEASE_FIX.txt```
+
+Answer:
+OPEN_BUCKET_PLEASE_FIX.txt
 
 To be continued...
 
