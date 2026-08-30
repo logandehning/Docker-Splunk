@@ -285,5 +285,26 @@ The searched returned 3 events with one of them being a ```REST.PUT.OBJECT``` op
 Answer:
 OPEN_BUCKET_PLEASE_FIX.txt
 
+#### Question 206
+
+Question: What is the size (in megabytes) of the .tar.gz file that was successfully uploaded into the S3 bucket while it was publicly accessible?
+
+Process:
+
+I utilized a similar search to the one I ran in the previous question, but changed the file type and added the operation type to the query.
+```
+sourcetype="aws:s3:accesslogs" operation="REST.PUT.OBJECT" "*frothlywebcode*" "*.tar.gz*"
+```
+
+This search returned one event with a field "object_size" which was given in bytes. The question specified to submit and answer in MB and rounded to 2 decimal places, so I added ```eval``` to divide the number of bytes by 1024 to find KB, then divide by 1024 again to find MB, then round the result to two decimal places, and output a table with the result.
+```
+sourcetype="aws:s3:accesslogs" operation="REST.PUT.OBJECT" "*frothlywebcode*" "*.tar.gz*"
+| eval file_size = round(object_size/1024/1024,2)
+| table file_size
+```
+
+Answer:
+2.93
+
 To be continued...
 
