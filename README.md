@@ -306,5 +306,28 @@ sourcetype="aws:s3:accesslogs" operation="REST.PUT.OBJECT" "*frothlywebcode*" "*
 Answer:
 2.93
 
+#### Question 208
+
+Question: A Frothly endpoint exhibits signs of coin mining activity. What is the name of the first process to reach 100 percent CPU processor utilization time from this activity on this endpoint?
+
+Process:
+
+A web search for sourcetypes related to process CPU usage revealed ```Perfmon:Process```  or ```PerfmonMk:Process``` were the sourcetypes I should investigate. I ran a metadata query like i did in Question 200 to determine if either of those sourcetypes were present.
+```
+| metadata type=sourcetypes
+| stats values(sourcetype) as sourcetype
+```
+
+This search showed the presence of the ```PerfmonMk:Process``` sourcetype. The web search I conducted also showed that the field name ```process_cpu_used_percent``` might also be useful for seeing process CPU usage so I included it in my next query and used ```reverse``` to see the oldest events first.
+```
+sourcetype="PerfmonMk:Process" process_cpu_used_percent="100*"
+| reverse
+```
+
+The first event displayed is for the process MicrosoftEdgeCP#2. However, this event occurred at 9:36 AM which would have been prior to the S3 bucket being publicly accessible. The next event (that did occur during the time the S3 bucket was vulnerable) was for the process `chrome#5`.
+
+Answer:
+chrome#5
+
 To be continued...
 
