@@ -348,5 +348,30 @@ Reviewing those events showed that 7 packages and 13 dependent packages were ins
 Answer:
 7,13
 
+#### Question 210
+What is the short hostname of the only Frothly endpoint to actually mine Monero cryptocurrency?
+
+Process:
+
+Question 208 showed that there was cryptocurrency mining taking place on the host `BSTOLL-L` so I decided to start there with a search for relevant activity on that host with this query:
+```
+host="BSTOLL-L" ("*monero*" OR "*coin*" OR "*crypto*")
+```
+
+This query returned 320 results and the inclusion of "crypto" seemed to be adding significant noise to the results so I ran this query next:
+```
+host="BSTOLL-L" ("*monero*" OR "*coin*")
+```
+
+I noticed that there were DNS queries to the domain `coinhive[.]com`. Coinhive was a cryptocurrency mining service popular in cryptojacking. To verify this was the only host with this activity, and thus our answer, I ran this query:
+```
+sourcetype="stream:dns" source="stream:dns" query{}="*coinhive*"
+```
+
+The only host seen in the results for this query is `BSTOLL-L`.
+
+Answer:
+BSTOLL-L
+
 To be continued...
 
