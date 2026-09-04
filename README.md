@@ -343,6 +343,7 @@ sourcetype="cloud-init*" "*package*" linecount=257
 ```
 
 Reviewing those events showed that 7 packages and 13 dependent packages were installed.
+![installed_packages](installed_packages.png)
 
 Answer:
 7,13
