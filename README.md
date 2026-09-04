@@ -154,14 +154,14 @@ I knew they were working when I saw the correct rows from the CSV files returned
 ## 4. The BOTS Challenge
 
 #### Question 1
-Question: This is a simple question to get you familiar with submitting answers. What is the name of the company that makes the software that you are using for this competition? Answer guidance: A six-letter word with no punctuation.
+This is a simple question to get you familiar with submitting answers. What is the name of the company that makes the software that you are using for this competition? Answer guidance: A six-letter word with no punctuation.
 
 Process: This is just a sample question designed to let player know how the CTF works. 
 
 Answer: splunk
 
 #### Question 200
-Question: List out the IAM users that accessed an AWS service (successfully or unsuccessfully) in Frothly's AWS environment.
+List out the IAM users that accessed an AWS service (successfully or unsuccessfully) in Frothly's AWS environment.
 
 Process:
 
@@ -197,7 +197,7 @@ Answer:
 bstoll,btun,splunk_access,web_admin
 
 #### Question 201
-Question: What field would you use to alert that AWS API activity have occurred without MFA (multi-factor authentication)?
+What field would you use to alert that AWS API activity have occurred without MFA (multi-factor authentication)?
 
 Process:
 
@@ -212,7 +212,7 @@ Answer:
 userIdentity.sessionContext.attributes.mfaAuthenticated
 
 #### Question 202
-Question: What is the processor number used on the web servers?
+What is the processor number used on the web servers?
 
 Process:
 
@@ -238,7 +238,7 @@ Answer:
 E5-2676
 
 #### Question 203
-Question: Bud accidentally makes an S3 bucket publicly accessible. What is the event ID of the API call that enabled public access?
+Bud accidentally makes an S3 bucket publicly accessible. What is the event ID of the API call that enabled public access?
 
 Process:
 
@@ -257,7 +257,7 @@ Answer:
 ab45689d-69cd-41e7-8705-5350402cf7ac
 
 #### Question 204
-Question: What is the name of the S3 bucket that was made publicly accessible?
+What is the name of the S3 bucket that was made publicly accessible?
 
 Process:
 
@@ -267,7 +267,7 @@ Answer:
 frothlywebcode
 
 #### Question 205
-Question: What is the name of the text file that was successfully uploaded into the S3 bucket while it was publicly accessible?
+What is the name of the text file that was successfully uploaded into the S3 bucket while it was publicly accessible?
 
 Process:
 
@@ -286,8 +286,7 @@ Answer:
 OPEN_BUCKET_PLEASE_FIX.txt
 
 #### Question 206
-
-Question: What is the size (in megabytes) of the .tar.gz file that was successfully uploaded into the S3 bucket while it was publicly accessible?
+What is the size (in megabytes) of the .tar.gz file that was successfully uploaded into the S3 bucket while it was publicly accessible?
 
 Process:
 
@@ -307,12 +306,11 @@ Answer:
 2.93
 
 #### Question 208
-
-Question: A Frothly endpoint exhibits signs of coin mining activity. What is the name of the first process to reach 100 percent CPU processor utilization time from this activity on this endpoint?
+A Frothly endpoint exhibits signs of coin mining activity. What is the name of the first process to reach 100 percent CPU processor utilization time from this activity on this endpoint?
 
 Process:
 
-A web search for sourcetypes related to process CPU usage revealed ```Perfmon:Process```  or ```PerfmonMk:Process``` were the sourcetypes I should investigate. I ran a metadata query like i did in Question 200 to determine if either of those sourcetypes were present.
+A web search for sourcetypes related to process CPU usage revealed ```Perfmon:Process```  or ```PerfmonMk:Process``` were the source types I should investigate. I ran a metadata query like i did in Question 200 to determine if either of those sourcetypes were present.
 ```
 | metadata type=sourcetypes
 | stats values(sourcetype) as sourcetype
@@ -328,6 +326,26 @@ The first event displayed is for the process MicrosoftEdgeCP#2. However, this ev
 
 Answer:
 chrome#5
+
+#### Question 209
+When a Frothly web server EC2 instance is launched via auto scaling, it performs automated configuration tasks after the instance starts. How many packages and dependent packages are installed by the cloud initialization script?
+
+Process:
+
+A review of the sourcetypes showed two promising values possibly related to a cloud initialization script: `cloud-init` and `cloud-init-output`. My first query was to see if there was anything in those source types related to "package".
+```
+sourcetype="cloud-init*" "*package*"
+```
+
+This search returned 117 results so it needed to be narrowed. Looking though the fields, I saw that there were 6 events with a line count of 257, with the rest either having 1 or 30 lines. I decided to start with the most verbose events first and added that `linecount` value to my query.
+```
+sourcetype="cloud-init*" "*package*" linecount=257
+```
+
+Reviewing those events showed that 7 packages and 13 dependent packages were installed.
+
+Answer:
+7,13
 
 To be continued...
 
