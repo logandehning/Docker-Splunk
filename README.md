@@ -416,5 +416,19 @@ Using a web search for "symantec jscoinminer", I found the Attack Signature page
 Answer:
 Medium
 
+#### Question 214
+What is the short hostname of the only Frothly endpoint to show evidence of defeating the cryptocurrency threat?
+
+Process:
+
+Looking at the events from the previous question, the `Event_Description` field mentioned malicious activity being "blocked". I ran the following query to see all hosts associated with events containing "blocked" and only one hostname was returned: `BTUN_L`.
+```
+sourcetype="symantec:ep:*" Event_Description="*blocked*"
+| stats count by Host_Name
+```
+
+Answer:
+BTUN-L
+
 To be continued...
 
