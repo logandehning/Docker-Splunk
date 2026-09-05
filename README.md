@@ -385,5 +385,26 @@ Using the results from the last query, there are 6 `coinhive[.]com` destinations
 Answer:
 6
 
+#### Question 212
+Using Splunk's event order functions, what is the first seen signature ID of the coin miner threat according to Frothly's Symantec Endpoint Protection (SEP) data?
+
+Process:
+
+I ran a query for any references to "signature" in the SEP sourcetypes.
+```
+sourcetype="symantec:ep:*" "*signature*"
+```
+
+This returned 53 events related to "JSCoinminer Download 6" and "JSCoinminer Download 8". The `CIDS_Signature_ID` field values for these events were `30356` and `30358`. Based on the question instructions, I narrowed my query to look for events with the `CIDS_Signature_ID` field used the order function `first` to find which occurred first.
+```
+sourcetype="symantec:ep:*" CIDS_Signature_ID=*
+| stats first(CIDS_Signature_ID)
+```
+
+The signature ID returned by the query was `30358`.
+
+Answer
+30358
+
 To be continued...
 
