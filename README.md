@@ -373,5 +373,17 @@ The only host seen in the results for this query is `BSTOLL-L`.
 Answer:
 BSTOLL-L
 
+#### Question 211
+How many cryptocurrency mining destinations are visited by Frothly endpoints?
+
+Process:
+
+Using the results from the last query, there are 6 `coinhive[.]com` destinations in the `query{}` field.
+
+![coinhive_destinations](coinhive_destinations.png)
+
+Answer:
+6
+
 To be continued...
 
