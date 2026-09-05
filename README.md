@@ -406,5 +406,15 @@ The signature ID returned by the query was `30358`.
 Answer
 30358
 
+#### Question 213
+According to Symantec's website, what is the severity of this specific coin miner threat?
+
+Process:
+
+Using a web search for "symantec jscoinminer", I found the Attack Signature page for [JSCoinminer Download 8](https://www.broadcom.com/support/security-center/attacksignatures/detail?asid=30358). There was no severity listed on that page. I also looked on the page for [JSCoinminer Download 6](https://www.broadcom.com/support/security-center/attacksignatures/detail?asid=30356) which also did not have a severity rating. Finally, I conducted a web search for "symantec jscoinminer severity" which led me to the Attack Signature page for [JSCoinminer Download 40](https://www.broadcom.com/support/security-center/attacksignatures/detail?asid=30642) and showed the severity as `Medium`. This was the correct answer.
+
+Answer:
+Medium
+
 To be continued...
 
