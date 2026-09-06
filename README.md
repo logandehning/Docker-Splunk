@@ -430,5 +430,39 @@ sourcetype="symantec:ep:*" Event_Description="*blocked*"
 Answer:
 BTUN-L
 
+#### Question 215
+What is the FQDN of the endpoint that is running a different Windows operating system edition than the others?
+
+Process:
+
+In order to try and identify sourcetypes and sources of interest, I ran the following query:
+```
+"*windows*"
+| stats count by sourcetype, source
+```
+
+Reviewing the results showed the sourcetype/source `WinHostMon` and `operatingsystem`. I then ran a query to find possible fields of interest for answering the question using this source:
+```
+source="WinHostMon" source="operatingsystem"
+```
+
+The field `OS` shows the OS version and the field `ComputerName` shows the name of the host. I ran this query to find the host with the unique OS version:
+```
+source="WinHostMon" source="operatingsystem"
+| stats values(ComputerName) by OS
+```
+
+The results of this query showed that `BSTOLL-L` is running Windows 10 Enterprise while the other hosts are running Windows 10 Pro.
+
+To find the FQDN for this host, I ran a query for that host in WinEventLogs.
+```
+sourcetype="wineventlog" host="BSTOLL-L"
+```
+
+The `ComputerName` field in the WinEventLogs shows that the FQDN for the host is `BSTOLL-L.froth.ly`
+
+Answer:
+BSTOLL-L.froth.ly
+
 To be continued...
 
