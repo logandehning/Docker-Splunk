@@ -464,5 +464,39 @@ The `ComputerName` field in the WinEventLogs shows that the FQDN for the host is
 Answer:
 BSTOLL-L.froth.ly
 
+#### Question 216
+According to the Cisco NVM flow logs, for how many seconds does the endpoint generate Monero cryptocurrency?
+
+Process:
+A web search for "cisco nvm flow logs source splunk" showed that the default sourcetype for Cisco Network Visibility Module (NVM) flow logs is typically `cisco:nvm:flowdata` or `cisco:nvm:flowdata:v2`. The metadata query for sourcetypes did not show either of these listed so I tried a similar query looking for sources instead.
+```
+| metatdata type=sources
+| stats values(source) as source
+```
+
+This showed the source of interest: `cisconvmflowdata`.
+
+I then ran a query to see events in this sources related to `coinhive`.
+```
+source="ciscoflowdata" "*coinhive*"
+```
+
+This returned 6 events. A web search for "cisco nvm flow data time fields" revealed that the `fss` (Flow StartSeconds) and `fes` (Flow EndSeconds) indicate the beginning and end timestamps of the network flow. I ran a query to calculate the total time by subtracting the earliest `fss` from the latest `fes`.
+```
+source="cisconvmflowdata" "*coinhive*"
+| stats max(fes) as end_flow, min(fss) as start_flow
+| eval total_time = end_flow - start_flow
+| table total_time
+```
+
+This gave me the result of 1667 seconds. The correct answer according to the official data, though, was 1666 seconds.
+
+![216_query](216_query.png)
+
+![216_answer](216_answer.png)
+
+Answer:
+1667
+
 To be continued...
 
