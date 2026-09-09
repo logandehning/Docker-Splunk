@@ -498,5 +498,9 @@ This gave me the result of 1667 seconds. The correct answer according to the off
 Answer:
 1667
 
+#### Question 217
+What kind of Splunk visualization was the first file attachment that Bud emails to Frothly employees to illustrate the coin miner issue?
+
+
 To be continued...
 
