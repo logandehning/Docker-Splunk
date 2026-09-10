@@ -501,6 +501,10 @@ Answer:
 #### Question 217
 What kind of Splunk visualization was the first file attachment that Bud emails to Frothly employees to illustrate the coin miner issue?
 
+Process:
+
+Answer:
+
 
 To be continued...
 
