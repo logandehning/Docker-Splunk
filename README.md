@@ -516,6 +516,7 @@ sourcetype="stream:smtp" "bud" "splunk" | search sender_email | search sender_em
 This returned one event. Reviewing the attachments showed two images: `image002.jpg` and `image003.jpg`. In the `content{}` field, the attachments can be seen in Base64 encoded text. A web search for "base64 to image" led me to [Base64.Guru](https://base64.guru/converter/decode/image) where I could paste the Base64 encoded text and see the image003 attachment. I attempted to view the image002 attachment as well, but was unable to successfully see the image. Ultimately, this did not matter, as the question specifically asked for the first file attachment sent. Reviewing the timestamps on the email chain, image003 was sent at 1:03AM and image002 was sent at 2:44 AM.
 
 Looking at the image itself, the visualization is listed as a "`Column Chart`".
+![217_attachment](217_attachment.png)
 
 Answer:
 Column Chart
