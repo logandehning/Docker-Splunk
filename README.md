@@ -503,8 +503,22 @@ What kind of Splunk visualization was the first file attachment that Bud emails 
 
 Process:
 
-Answer:
+Reviewing the available sourcetypes showed `stream:smpt` as a sourcetype of interest. I included "bud" and "splunk" in the search to see if those were two keywords mentioned in the question.
+```
+sourcetype="stream:smtp" "bud" "splunk"
+```
 
+This search returned 11 events. Using `Ctrl+F`, I looked for "bud" and found a sender email for Bud Stoll `bstoll@froth.ly` so I added that to the search and ran it again.
+```
+sourcetype="stream:smtp" "bud" "splunk" | search sender_email | search sender_email="bstoll@froth.ly"
+```
+
+This returned one event. Reviewing the attachments showed two images: `image002.jpg` and `image003.jpg`. In the `content{}` field, the attachments can be seen in Base64 encoded text. A web search for "base64 to image" led me to [Base64.Guru](https://base64.guru/converter/decode/image) where I could paste the Base64 encoded text and see the image003 attachment. I attempted to view the image002 attachment as well, but was unable to successfully see the image. Ultimately, this did not matter, as the question specifically asked for the first file attachment sent. Reviewing the timestamps on the email chain, image003 was sent at 1:03AM and image002 was sent at 2:44 AM.
+
+Looking at the image itself, the visualization is listed as a "`Column Chart`".
+
+Answer:
+Column Chart
 
 To be continued...
 
