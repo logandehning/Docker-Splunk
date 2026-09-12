@@ -521,5 +521,15 @@ Looking at the image itself, the visualization is listed as a "`Column Chart`".
 Answer:
 Column Chart
 
+#### Question 218
+
+
+Process:
+
+
+
+Answer:
+
+
 To be continued...
 
