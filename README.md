@@ -522,11 +522,19 @@ Answer:
 Column Chart
 
 #### Question 218
-
+What IAM user access key generates the most distinct errors when attempting to access IAM resources?
 
 Process:
 
+Looking back at Question 200, I wanted to see any events involving errors for `IAMUser` users in `aws:cloudtrail`.
+```
+sourcetype="aws:cloudtrail" user_type="IAMUser" "*error*"
+```
 
+I then focused on the field `errorCode`. Since there is an error code "`success`", I could exclude those events. The question also specified that the errors of interest occur when attempting to access IAM resources. Looking at the `eventSource` field, only one of them deals with IAM. The other three values in that field deal with EC2, S3, and key management. I further refined the events with anther query.
+```
+sourcetype="aws:cloudtrail" user_type+"IAMUser" errorCode!="success" eventSource="iam.amazonaws.com"
+```
 
 Answer:
 
