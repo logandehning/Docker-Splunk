@@ -531,7 +531,7 @@ Looking back at Question 200, I wanted to see any events involving errors for `I
 sourcetype="aws:cloudtrail" user_type="IAMUser" "*error*"
 ```
 
-I then focused on the field `errorCode`. Since there is an error code "`success`", I could exclude those events. The question also specified that the errors of interest occur when attempting to access IAM resources. Looking at the `eventSource` field, only one of them deals with IAM. The other three values in that field deal with EC2, S3, and key management. I further refined the events with anther query.
+I then focused on the field `errorCode`. Since there is an error code "`success`", I could exclude those events. The question also specified that the errors of interest occur when attempting to access IAM resources. Looking at the `eventSource` field, only one of them deals with IAM. The other three values in that field deal with EC2, S3, and key management. I further refined the events with another query.
 ```
 sourcetype="aws:cloudtrail" user_type+"IAMUser" errorCode!="success" eventSource="iam.amazonaws.com"
 ```
