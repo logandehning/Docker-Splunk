@@ -536,6 +536,8 @@ I then focused on the field `errorCode`. Since there is an error code "`success`
 sourcetype="aws:cloudtrail" user_type+"IAMUser" errorCode!="success" eventSource="iam.amazonaws.com"
 ```
 
+
+
 Answer:
 
 
