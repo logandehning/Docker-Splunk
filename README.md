@@ -532,14 +532,22 @@ sourcetype="aws:cloudtrail" user_type="IAMUser" "*error*"
 ```
 
 I then focused on the field `errorCode`. Since there is an error code "`success`", I could exclude those events. The question also specified that the errors of interest occur when attempting to access IAM resources. Looking at the `eventSource` field, only one of them deals with IAM. The other three values in that field deal with EC2, S3, and key management. I further refined the events with another query.
+
 ```
 sourcetype="aws:cloudtrail" user_type+"IAMUser" errorCode!="success" eventSource="iam.amazonaws.com"
 ```
 
+Next, I wanted to see the number of _distinct_ events so my next query used the distinct count `dc` function to count the number of distinct `errorMessage` events and then group the stats by `userIdentity.accessKeyId` since the question is specifically asking for an access key as the answer.
 
+```
+sourcetype="aws:cloudtrail" user_type+"IAMUser" errorCode!="success" eventSource="iam.amazonaws.com"
+| stats dc(errorMessage) by userIdentity.accessKeyId
+```
+
+All of the access keys returned just one unique errorMessage, so I took a gamble and guessed `ASIAZB6TMXZ7MJUJJK6X` but the answer was actually `AKIAJOGCDXJ5NW5PXUPA`.
 
 Answer:
-
+AKIAJOGCDXJ5NW5PXUPA
 
 To be continued...
 
