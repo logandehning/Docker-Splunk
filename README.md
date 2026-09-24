@@ -549,5 +549,20 @@ All of the access keys returned just one unique errorMessage, so I took a gamble
 Answer:
 AKIAJOGCDXJ5NW5PXUPA
 
+#### Question 219
+Bud accidentally commits AWS access keys to an external code repository. Shortly after, he receives a notification from AWS taht the accoun had been compromised. What is the support case ID that Amazon opens on his behalf?
+
+Process:
+
+Even though the question did not specify _how_ Bud was notified, I assumed it would be via email and ran this query:
+```
+sourcetype="stream:smtp" "amazon" "case"
+```
+
+This returned the email notificaiton sent to Bud with the subject line "Amazon Web ServicesL New Support case: 5244329601"
+
+Answer:
+5244329601
+
 To be continued...
 
