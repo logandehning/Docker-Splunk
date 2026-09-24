@@ -564,5 +564,21 @@ This returned the email notificaiton sent to Bud with the subject line "Amazon W
 Answer:
 5244329601
 
+#### Question 220
+Amazon access keys consist of two parts: an access key ID and a secret access key. What is the secret access key of the key that was leaked to the external code repository?
+
+Process:
+
+In the email notification from AWS, there is a link to the GitHub repository where the secret key was leaked. Navigating to the repo showed the following information:
+```text
+[web_admin]
+aws_access_key_id = AKIAJOGCDXJ5NW5PXUPA
+aws_secret_access_key = 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
+region = us-west-1
+```
+
+Answer:
+Bx8/gTsYC98T0oWiFhpmdROqhELPtXJSR9vFPNGk
+
 To be continued...
 
