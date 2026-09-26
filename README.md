@@ -580,5 +580,27 @@ region = us-west-1
 Answer:
 Bx8/gTsYC98T0oWiFhpmdROqhELPtXJSR9vFPNGk
 
+#### Question 221
+Using the leaked key, the adversary makes an unauthorized attempt to create a key for a specific resource. What is the name of that resource?
+
+Process:
+
+I knew from Question 218 that I could see events related to that leaked key using the `userIdentity.accessKeyId` field.
+
+```
+sourcetype="aws:cloudtrail" userIdentity.accessKeyId="AKIAJOGCDXJ5NW5PXUPA"
+```
+
+Looking through the fields in the events returned by this query, I can see that there is a `CreateAccessKey` value for the `eventName` field, so I added that to my query.
+
+```
+sourcetype="aws:cloudtrail" userIdentity.accessKeyId="AKIAJOGCDXJ5NW5PXUPA" eventName="CreateAccessKey"
+```
+
+The error message shows that the attempted key creation was for the resource `nullweb_admin`.
+
+Answer:
+nullweb_admin
+
 To be continued...
 
