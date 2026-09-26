@@ -602,5 +602,21 @@ The error message shows that the attempted key creation was for the resource `nu
 Answer:
 nullweb_admin
 
+#### Question 222
+Using the leaked key, the adversary makes and unauthorized attempt to describe an account. What is the full user agent string of the application that originated the request?
+
+Process:
+
+I used the same initial search as the previous question, but looking for any events with the word "describe".
+
+```
+sourcetype="aws:cloudtrail" userIdentity.accessKeyId="AKIAJOGCDXJ5NW5PXUPA" "*describe*"
+```
+
+One event was returned where the `eventName` value was `DescribeAccountAttributes`. The user agent for that request was `ElasticWolf/5.1.6`.
+
+Answer:
+ElasticWolf/5.1.6
+
 To be continued...
 
