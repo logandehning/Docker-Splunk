@@ -618,5 +618,28 @@ One event was returned where the `eventName` value was `DescribeAccountAttribute
 Answer:
 ElasticWolf/5.1.6
 
+#### Question 223
+The adversary attempts to launch an Ubuntu cloud image as the compromised IAM user. What is the codename for that operating system version in the first attempt?
+
+Process:
+
+At first, I used the same search as the previous question and looked through the fields to see anything related to the activity in the question. After a fruitless search, I realized I was only searching using the `userIdentity.accessKeyId`, so I decided to instead use the `userName` value: `web_admin`.
+
+```
+sourcetype="aws:cloudtrail" userName="web_admin"
+```
+
+Reviewing the `eventName` values in the returned events led me to include `RunInstances` as well and sort by time since the question is asking for the value from the first attempt.
+
+```
+sourcetype="aws:cloudtrail" userName="web_admin" eventName=RunInstances
+| sort _time
+```
+
+Reviewing the first event returned by this search revealed the field `imageId` aka `requestParameters.instancesSet.items{}.imageId`. I conducted a web search for the first value I saw in this field, `ami-41e0b93b`, and learned this is the Amazon Machine Image (AMI) ID for Ubuntu 16.04 LTS. A search for "ubuntu ami-41e0b93b codename" revealed the codename for this version is "Xenial Xerus".
+
+Answer:
+Xenial Xerus
+
 To be continued...
 
