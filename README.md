@@ -641,5 +641,57 @@ Reviewing the first event returned by this search revealed the field `imageId` a
 Answer:
 Xenial Xerus
 
+#### Question 224
+Frothly uses Amazon Route 53 for their DNS web service. What is the average length of the distinct third-level subdomains in the queries to brewertalk.com?
+
+Process:
+
+I first ran a query to fine the source for the DNS logs.
+
+```
+| metadata type=sources
+| stats values(source) as source
+```
+
+The two most promising were `lambda:DNS` and `stream:dns`. A web search showed that the `lambda:DNS` source would be the most likely place to find information related to Route 53. My first thought was to use some sort of regex in my query to extract the subdomains, but further web searching led me the Splunk app URL Toolbox. Before I could use it, though, I needed to extract the URL from the lambda:DNS data.
+
+The first step for a field extraction is to use the "Extract New Fields" button.
+
+![224_step1.png](224_step1.png)
+
+Next, select an example event.
+
+![224_step2.png](224_step2.png)
+
+For this case, I selected "Delimiters"
+
+![224_step3.png](224_step3.png)
+
+I delimeted the events by space and then renamed the fourth field "`url`" to be able to use it with the "ut_parse_extended" search macro in URL toolbox.
+
+![224_step4.png](224_step4.png)
+
+That allowed me to run a query using the `ut_parse_extended` search macro.
+
+```
+source="lambda:DNS" "*brewertalk.com*"
+| eval list="brewertalk"
+| `ut_parse_extended(url, list)`
+```
+
+Using URL Toolbox gave me new field options, most importantly, "`ut_subdomain_level_1`" which corresponds to the third-level subdomain specified in the question. Now I needed to run a query that used `dedup` to get only unique third-level subdomains, `eval` their lengths, and get the average of all lengths.
+
+```
+source="lambda:DNS" "*brewertalk.com*"
+| eval list="brewertalk"
+| `ut_parse_extended(url, list)`
+| dedup ut_subdomain_level_1
+| eval length=len(ut_subdomain_level_1)
+| stats avg(length) as average
+
+Answer:
+8.099, rounded to 8.10
+```
+
 To be continued...
 
