@@ -659,7 +659,7 @@ The first step for a field extraction is to use the "Extract New Fields" button.
 
 ![224_step1.png](224_step1.png)
 
-Next, select an example event.
+Next, select a example event.
 
 ![224_step2.png](224_step2.png)
 
