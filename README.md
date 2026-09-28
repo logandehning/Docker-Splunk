@@ -688,10 +688,10 @@ source="lambda:DNS" "*brewertalk.com*"
 | dedup ut_subdomain_level_1
 | eval length=len(ut_subdomain_level_1)
 | stats avg(length) as average
+```
 
 Answer:
 8.099, rounded to 8.10
-```
 
 To be continued...
 
