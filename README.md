@@ -693,5 +693,13 @@ source="lambda:DNS" "*brewertalk.com*"
 Answer:
 8.099, rounded to 8.10
 
+#### Question 225
+Using the payload data found in the memcached attack, what is the name of the .jpeg file that is used by Taedonggang to deface other brewey websites?
+To be continued...
+
+Process:
+
+I was unfamiliar with a memcached attack so I conducted some web searches that revealed memcached is a type of distributed DDoS amplification attack that exploits unprotected Memcached database caching servers exposed to the public internet, and that the attacker sends small requests to a vulnerable Memcached server via the UDP protocol on port 11211.
+
 To be continued...
 
