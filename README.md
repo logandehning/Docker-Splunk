@@ -701,5 +701,33 @@ Process:
 
 I was unfamiliar with a memcached attack so I conducted some web searches that revealed memcached is a type of distributed DDoS amplification attack that exploits unprotected Memcached database caching servers exposed to the public internet, and that the attacker sends small requests to a vulnerable Memcached server via the UDP protocol on port 11211.
 
+#### Question 225
+Using the payload data found in the memcached attack, what is the name of the .jpeg file that is used by Taedonggang to deface other brewey websites?
+To be continued...
+
+Process:
+
+I was unfamiliar with a memcached attack so I conducted some web searches that revealed memcached is a type of distributed DDoS amplification attack that exploits unprotected Memcached database caching servers exposed to the public internet, and that the attacker sends small requests to a vulnerable Memcached server via the UDP protocol.
+
+I began by taking a preliminary look at the `stream:udp` logs.
+
+```
+sourcetype="stream:udp"
+| head 1000
+```
+
+Some events of note included `src_content` and `dest_content` fields with repeating phrases like "6HOUL@G3rpwnzFrothlyl4Life" and "CRYP70KOL5CH-OWNS-YOU".
+
+I attempted to find events realted to and .jpeg file by using the query:
+
+```
+sourcetype="stream:udp" "*.jpeg"
+```
+
+However, this did not return any events. The hints given in the data set said to Google the strings with special characters (e.g. "6HOUL@G3rpwnzFrothlyl4Life" and "CRYP70KOL5CH-OWNS-YOU") and investigate the defaced websites' source code. Due to the age of this challenge, the websites do not appear to be available any longer. The answer was `index1.jpeg`.
+
+Answer:
+index1.jpeg
+
 To be continued...
 
