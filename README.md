@@ -729,5 +729,35 @@ However, this did not return any events. The hints given in the data set said to
 Answer:
 index1.jpeg
 
+#### Question 300
+What is the full user agent string that uploaded the malicious link file to OneDrive?
+
+Process:
+
+Looked through the available sourcetypes once again.
+
+```
+| metadata type=sourcetypes
+| stats values(sourcetype) as sourcetype
+```
+
+Several sourcetypes are seen related to Microsoft Office 365, so I searched for events related to "upload" and "onedrive"
+
+```
+sourcetype="*o365*" "*onedrive*" "*upload*"
+```
+
+I decided to refine the search by specifying only `FileUploaded` operations, specifying the `Workload` as `OneDrive`, and outputting the events as a table to reduce the visual noise in the returned events.
+
+```
+sourcetype="*o365*" Operation=FileUploaded Workload=OneDrive
+| table object, user, UserAgent
+```
+
+14 events are returned, with two of them being for the same `BRUCE BIRTHDAY HAPPY HOUR PICS.lnk` link file. These are the only events for a .lnk file. These events were both uploaded by the user agent `Mozilla/5.0 (X11; U; Linux i686; ko-KP; rv: 19.1br) Gecko/20130508 Fedora/1.9.1-2.5.rs 3.0 NaenaraBrowser/3.5b4`. This is the North Korean web browser NaenaraBrowser.
+
+Answer:
+Mozilla/5.0 (X11; U; Linux i686; ko-KP; rv: 19.1br) Gecko/20130508 Fedora/1.9.1-2.5.rs 3.0 NaenaraBrowser/3.5b4
+
 To be continued...
 
