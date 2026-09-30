@@ -695,8 +695,60 @@ Answer:
 
 #### Question 225
 Using the payload data found in the memcached attack, what is the name of the .jpeg file that is used by Taedonggang to deface other brewey websites?
-To be continued...
 
 Process:
 
 I was unfamiliar with a memcached attack so I conducted some web searches that revealed memcached is a type of distributed DDoS amplification attack that exploits unprotected Memcached database caching servers exposed to the public internet, and that the attacker sends small requests to a vulnerable Memcached server via the UDP protocol.
+
+I began by taking a preliminary look at the `stream:udp` logs.
+
+```
+sourcetype="stream:udp"
+| head 1000
+```
+
+Some events of note included `src_content` and `dest_content` fields with repeating phrases like "6HOUL@G3rpwnzFrothlyl4Life" and "CRYP70KOL5CH-OWNS-YOU".
+
+I attempted to find events realted to and .jpeg file by using the query:
+
+```
+sourcetype="stream:udp" "*.jpeg"
+```
+
+However, this did not return any events. The hints given in the data set said to Google the strings with special characters (e.g. "6HOUL@G3rpwnzFrothlyl4Life" and "CRYP70KOL5CH-OWNS-YOU") and investigate the defaced websites' source code. Due to the age of this challenge, the websites do not appear to be available any longer. The answer was `index1.jpeg`.
+
+Answer:
+index1.jpeg
+
+#### Question 300
+What is the full user agent string that uploaded the malicious link file to OneDrive?
+
+Process:
+
+Looked through the available sourcetypes once again.
+
+```
+| metadata type=sourcetypes
+| stats values(sourcetype) as sourcetype
+```
+
+Several sourcetypes are seen related to Microsoft Office 365, so I searched for events related to "upload" and "onedrive"
+
+```
+sourcetype="*o365*" "*onedrive*" "*upload*"
+```
+
+I decided to refine the search by specifying only `FileUploaded` operations, specifying the `Workload` as `OneDrive`, and outputting the events as a table to reduce the visual noise in the returned events.
+
+```
+sourcetype="*o365*" Operation=FileUploaded Workload=OneDrive
+| table object, user, UserAgent
+```
+
+14 events are returned, with two of them being for the same `BRUCE BIRTHDAY HAPPY HOUR PICS.lnk` link file. These are the only events for a .lnk file. These events were both uploaded by the user agent `Mozilla/5.0 (X11; U; Linux i686; ko-KP; rv: 19.1br) Gecko/20130508 Fedora/1.9.1-2.5.rs 3.0 NaenaraBrowser/3.5b4`. This is the North Korean web browser NaenaraBrowser.
+
+Answer:
+Mozilla/5.0 (X11; U; Linux i686; ko-KP; rv: 19.1br) Gecko/20130508 Fedora/1.9.1-2.5.rs 3.0 NaenaraBrowser/3.5b4
+
+To be continued...
+
