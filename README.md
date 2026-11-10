@@ -755,10 +755,25 @@ What external client IP address is able to initiate successful logins to Frothly
 
 Process:
 
+Looking through the available sourcetypes, I noticed the `ms:aad:signin` and `ms:aad:audit` sourcetypes for Azure Active Directory logs. I queried these sourcetypes for any mention of "expired".
 
+```
+sourcetype="ms:aad:*" "expired"
+```
+
+This returned a failed sign-in event for the user Kevin Lagerfield. To verify if this is the correct user account, I looked for all sign-in and audit events related to this user's `user_id`.
+
+```
+sourcetype="ms:aad:*" "*klagerfield@froth.ly*"
+| reverse
+```
+
+Audit logs showed this user was previously disabled, but the value of `AccountEnabled` was changed from `[false]` to `[true]` before the password for the account was reset and evntually successful login events were observed.
+
+All of these events have the same source IP address: `199.66.91.253`.
 
 Answer:
-
+199.66.91.253
 
 To be continued...
 
