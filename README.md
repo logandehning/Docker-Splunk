@@ -750,5 +750,15 @@ sourcetype="*o365*" Operation=FileUploaded Workload=OneDrive
 Answer:
 Mozilla/5.0 (X11; U; Linux i686; ko-KP; rv: 19.1br) Gecko/20130508 Fedora/1.9.1-2.5.rs 3.0 NaenaraBrowser/3.5b4
 
+#### Question 301
+What external client IP address is able to initiate successful logins to Frothly using an expired user account?
+
+Process:
+
+
+
+Answer:
+
+
 To be continued...
 
