@@ -775,5 +775,35 @@ All of these events have the same source IP address: `199.66.91.253`.
 Answer:
 199.66.91.253
 
+#### Question 302
+According to Symantec's website, what is the discovery date of the malware identified in the macro-enabled file?
+
+Process:
+
+My first query to see any events related to a macro was:
+
+```
+"macro"
+```
+
+It only retuned 2 events that were not helpful, so I used this query to try and find some more events:
+
+```
+"*macro*"
+```
+
+This returned 19 events. Looking through the sourcetypes for the events showed one email event from `stream:smtp`. The email in the event had an attachment named `Malware Alert Text.txt`. This a generic attachment name displayed when Microsoft Exchange detects an attachment containing malware. Decoding the Base64 text in the `content` field of the email event showed the following message:
+
+```text
+Malware was detected in one or more attachments included with this email message. 
+Action: All attachments have been removed.
+Frothly-Brewery-Financial-Planning-FY2019-Draft.xlsm	 W97M.Empstage
+```
+
+A web search for `W97M.Empstage` returned the Broadcom malware [Cerfified Definitions](https://www.broadcom.com/support/security-center/definitions/certified?certid=2016-11) webpage for November 2016. It should be noted that Broadcom acquired the enterprise security business of Symantec in November 2019. The page shows a certified definition was created for `W97M.Empstage` on `11/12/2016`. This indicates that the malware itself was likely discovered the previous day on the 11th.
+
+Answer:
+11/11/16
+
 To be continued...
 
