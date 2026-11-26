@@ -805,5 +805,14 @@ A web search for `W97M.Empstage` returned the Broadcom malware [Cerfified Defini
 Answer:
 11/11/16
 
+#### Question 303
+What is the password for the user that was successfully created by the user "root" on the on-premises Linux system?
+
+Process:
+
+
+Answer:
+
+
 To be continued...
 
